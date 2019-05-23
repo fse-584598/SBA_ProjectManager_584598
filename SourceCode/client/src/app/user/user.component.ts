@@ -15,7 +15,8 @@ export class UserComponent implements OnInit {
   isFirstNameAsc: any;
   isLastNameAsc: any;
   isEmpIdAsc: any;
-
+  searchText: string;
+  
   constructor(private userService: UserService, private eventService: EventService) {
     this.users = new Array<User>();
 
