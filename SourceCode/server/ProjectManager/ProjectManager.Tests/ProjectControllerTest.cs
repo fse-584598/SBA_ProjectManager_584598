@@ -14,7 +14,7 @@ namespace ProjectManager.Test
     [TestFixture]
     public class ProjectControllerTest
     {
-        
+        [Test]
         public void TestGetProjects_Success()
         {
             var context = new MockProjectManagerEntities();
@@ -43,44 +43,6 @@ namespace ProjectManager.Test
             Assert.IsNotNull(result);                     
             Assert.IsInstanceOf(typeof(List<Project>),result.Data);
             Assert.AreEqual((result.Data as List<Project>).Count, 2);
-        }
-
-        
-        public void TestInsertProjects_Success()
-        {
-            var context = new MockProjectManagerEntities();
-            var users = new TestDbSet<DAC.User>();
-            users.Add(new DAC.User()
-            {
-                Employee_ID = "584598",
-                First_Name = "Anup",
-                Last_Name = "Mondal",
-                User_ID = 123,
-                Task_ID = 123
-            });
-            context.Users = users;
-            var testProject = new Models.Project()
-            {
-                ProjectId = 12345,
-                ProjectName = "ProjectManager",
-                ProjectStartDate = DateTime.Now,
-                ProjectEndDate = DateTime.Now.AddDays(5),
-                Priority = 3,
-                NoOfCompletedTasks = 3,
-                NoOfTasks = 5,
-                User = new User()
-                {
-                    FirstName = "Anup",
-                    LastName = "Mondal",
-                    EmployeeId = "584598",
-                    UserId = 111
-                }
-            };
-            var controller = new ProjectController(new BC.ProjectBC(context));
-            var result = controller.InsertProjectDetails(testProject) as JSendResponse;
-
-            Assert.IsNotNull(result);
-            Assert.IsNotNull((context.Users.Local[0]).Project_ID);
         }
 
         [Test]
